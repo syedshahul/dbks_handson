@@ -1,0 +1,188 @@
+{
+  "datasets": [
+    {
+      "name": "93751e9a",
+      "displayName": "ingest_flights",
+      "queryLines": [
+        "SELECT * FROM workspace.flights.ingest_flights"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "e4f37a8a",
+      "displayName": "ingest_flights",
+      "layout": [
+        {
+          "widget": {
+            "name": "histogram-of-flight-speeds",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "93751e9a",
+                  "fields": [
+                    {
+                      "name": "count(velocity)",
+                      "expression": "COUNT(`velocity`)"
+                    },
+                    {
+                      "name": "velocity",
+                      "expression": "`velocity`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "count(velocity)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "velocity",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "frame": {
+                "title": "Histogram of Flight Speeds",
+                "showTitle": true
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 6,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "altitude-vs-velocity",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "93751e9a",
+                  "fields": [
+                    {
+                      "name": "geo_altitude",
+                      "expression": "`geo_altitude`"
+                    },
+                    {
+                      "name": "velocity",
+                      "expression": "`velocity`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "scatter",
+              "encodings": {
+                "x": {
+                  "fieldName": "geo_altitude",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "velocity",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "frame": {
+                "title": "Altitude vs Velocity",
+                "showTitle": true
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 0,
+            "width": 3,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "plot-unique-planes-coordinates",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "93751e9a",
+                  "fields": [
+                    {
+                      "name": "geo_altitude",
+                      "expression": "`geo_altitude`"
+                    },
+                    {
+                      "name": "latitude",
+                      "expression": "`latitude`"
+                    },
+                    {
+                      "name": "longitude",
+                      "expression": "`longitude`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "symbol-map",
+              "encodings": {
+                "coordinates": {
+                  "latitude": {
+                    "fieldName": "latitude"
+                  },
+                  "longitude": {
+                    "fieldName": "longitude"
+                  }
+                },
+                "color": {
+                  "fieldName": "geo_altitude",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "frame": {
+                "title": "Plot of unique planes by coordinates",
+                "showTitle": true
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 3,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
